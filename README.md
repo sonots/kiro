@@ -1,0 +1,3 @@
+```
+$ ruby kiro <filename>
+```
