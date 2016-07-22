@@ -89,14 +89,14 @@ PAGE_DOWN = 1008
 #
 # @return [Integer]
 def editorReadKey(fd)
-  seq = []
-  c = fd.read(1)
+  chars = fd.readpartial(3)
+  c, seq = chars[0], chars[1..-1]
 
   case c.ord
   when ESC    # escape sequence */
     # If this is just an ESC, we'll timeout here. */
-    return ESC unless (seq[0] = fd.read(1))
-    return ESC unless (seq[1] = fd.read(1))
+    return ESC unless seq[0]
+    return ESC unless seq[1]
 
     # ESC [ sequences. */
     if seq[0] == '['
